@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="mb-4 flex items-center space-x-2">
+  <a href="/dashboard" 
+     class="bg-gray-500 hover:bg-gray-600 text-white px-3 py-1 rounded flex items-center">
+    <!-- Optional icon -->
+    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" 
+         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" 
+            d="M15 19l-7-7 7-7"></path>
+    </svg>
+    Go Back Dashboard
+  </a>
+</div>
+
+
+<div class="flex flex-col space-y-6">
+
+  <!-- Page Header -->
+  <div class="bg-white dark:bg-gray-800 shadow-md rounded p-4">
+    <h1 class="text-2xl font-bold">Query History</h1>
+    <p class="text-gray-600 dark:text-gray-300 mt-1">
+      All executed queries are logged here.
+    </p>
+  </div>
+
+  <!-- Search / Filter -->
+  <div class="flex justify-end">
+    <input type="text" placeholder="Search queries..." x-model="search" class="p-2 rounded border dark:bg-gray-700 dark:text-white">
+  </div>
+
+  <!-- Query History Table -->
+  <div class="overflow-x-auto bg-white dark:bg-gray-800 shadow-md sm:rounded-lg">
+    <table class="min-w-full text-sm">
+      <thead class="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200">
+        <tr>
+          <th class="p-2 text-left">Time</th>
+          <th class="p-2 text-left">User</th>
+          <th class="p-2 text-left">Query</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in rows %}
+        <tr class="border-b hover:bg-gray-100 dark:hover:bg-gray-900">
+          <td class="p-2">{{ row.time }}</td>
+          <td class="p-2">{{ row.user }}</td>
+          <td class="p-2 font-mono break-words">{{ row.query }}</td>
+        </tr>
+        {% endfor %}
+        {% if rows|length == 0 %}
+        <tr>
+          <td colspan="3" class="p-2 text-center text-gray-500 dark:text-gray-400">No queries executed yet.</td>
+        </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- Alpine.js for simple search (optional) -->
+<script>
+  document.addEventListener('alpine:init', () => {
+    Alpine.data('historyTable', () => ({
+      search: ''
+    }))
+  })
+</script>
+{% endblock %}

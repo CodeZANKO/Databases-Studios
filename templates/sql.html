@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="mb-4 flex items-center space-x-2">
+  <a href="/dashboard" 
+     class="bg-gray-500 hover:bg-gray-600 text-white px-3 py-1 rounded flex items-center">
+    <!-- Optional icon -->
+    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" 
+         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" 
+            d="M15 19l-7-7 7-7"></path>
+    </svg>
+    Go Back Dashboard
+  </a>
+</div>
+
+<h2 class="text-xl font-bold mb-4">SQL Editor</h2>
+<form method="post">
+    <input type="hidden" name="query" id="query">
+    <div id="editor" class="h-64 border rounded mb-2"></div>
+    <button type="submit" onclick="submitQuery()"
+            class="bg-blue-500 px-4 py-1 text-white rounded">Run</button>
+</form>
+
+{% if error %}
+<div class="text-red-500 mt-2">{{ error }}</div>
+{% endif %}
+
+{% if result %}
+<table class="mt-4 min-w-full border text-sm">
+<tr>
+{% for key in result[0].keys() %}
+<th class="p-1">{{ key }}</th>
+{% endfor %}
+</tr>
+{% for row in result %}
+<tr>
+{% for value in row.values() %}
+<td class="p-1">{{ value }}</td>
+{% endfor %}
+</tr>
+{% endfor %}
+</table>
+{% endif %}
+
+<script src="https://unpkg.com/monaco-editor@0.45.0/min/vs/loader.js"></script>
+<script>
+require.config({ paths: { vs: 'https://unpkg.com/monaco-editor@0.45.0/min/vs' }});
+require(['vs/editor/editor.main'], function () {
+    window.editor = monaco.editor.create(
+        document.getElementById('editor'),
+        {
+            value: 'SELECT * FROM users;',
+            language: 'sql',
+            theme: 'vs-dark',
+            automaticLayout: true
+        }
+    );
+});
+function submitQuery(){
+    document.getElementById("query").value = editor.getValue();
+}
+</script>
+{% endblock %}

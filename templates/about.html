@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="flex flex-col items-center space-y-6 px-4 py-6">
+
+  <!-- Go Back Button -->
+  <div class="w-full max-w-3xl flex justify-start">
+    <a href="/dashboard" 
+       class="bg-gray-500 hover:bg-gray-600 text-white px-3 py-1 rounded flex items-center">
+      <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" 
+           viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" 
+              d="M15 19l-7-7 7-7"></path>
+      </svg>
+      Go Back Dashboard
+    </a>
+  </div>
+
+  <!-- Logo -->
+  <img src="/static/img/logo.png" alt="DB Studio Logo" class="w-48 h-24 mb-4 rounded-lg shadow-lg">
+
+  <!-- Content Container -->
+  <div class="w-full max-w-3xl space-y-6">
+
+    <!-- Page Header -->
+    <div class="bg-white dark:bg-gray-800 shadow rounded p-6 text-center">
+      <h1 class="text-3xl font-bold mb-2">About Database Studio</h1>
+      <p class="text-gray-600 dark:text-gray-300">
+        DB Studio is a modern web-based database management tool built with Flask, Tailwind CSS, and Python.
+      </p>
+    </div>
+
+    <!-- Features -->
+    <div class="bg-white dark:bg-gray-800 shadow rounded p-6">
+      <h2 class="text-2xl font-bold mb-3">Features</h2>
+      <ul class="list-disc list-inside space-y-1 text-gray-700 dark:text-gray-300">
+        <li>Connect to MySQL databases remotely</li>
+        <li>SQL Editor with autocomplete and query history</li>
+        <li>Inline edit, insert, and delete table rows</li>
+        <li>Import and export tables (CSV / SQL)</li>
+        <li>ER diagrams and table relation graphs</li>
+        <li>Audit logs and role-based permissions</li>
+        <li>Multi-database switch and dark mode UI</li>
+      </ul>
+    </div>
+
+    <!-- Version & Credits -->
+    <div class="bg-white dark:bg-gray-800 shadow rounded p-6">
+      <h2 class="text-2xl font-bold mb-3">Version & Credits</h2>
+      <p class="text-gray-700 dark:text-gray-300">
+        <strong>Version:</strong> 1.0.0<br>
+        <strong>Developer:</strong> Zanko Hatam Aziz Abdullkarim<br>
+        <strong>Tech Stack:</strong> Flask, Python, MySQL, Tailwind CSS, Alpine.js
+      </p>
+    </div>
+
+    <!-- Contact -->
+    <div class="bg-white dark:bg-gray-800 shadow rounded p-6">
+      <h2 class="text-2xl font-bold mb-3">Contact</h2>
+      <p class="text-gray-700 dark:text-gray-300">
+        For support, feedback, or contributions, contact: <br>
+        <a href="mailto:Zanko.h.azeez@gmail.com" class="text-blue-500 hover:underline">
+          Zanko.h.azeez@gmail.com
+        </a>
+      </p>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

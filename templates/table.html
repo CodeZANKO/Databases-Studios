@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="mb-4 flex items-center space-x-2">
+  <a href="/dashboard" 
+     class="bg-gray-500 hover:bg-gray-600 text-white px-3 py-1 rounded flex items-center">
+    <!-- Optional icon -->
+    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" 
+         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" 
+            d="M15 19l-7-7 7-7"></path>
+    </svg>
+    Go Back Dashboard
+  </a>
+</div>
+
+<h2 class="text-xl font-bold mb-4 text-center">Table : <span class="text-red-500">{{ name }}</span></h2>
+<form method="post" class="mb-3 flex">
+  <input name="search" placeholder="Search" class="p-2 rounded bg-gray-100 dark:bg-gray-700">
+  <button class="ml-2 bg-blue-500 px-3 py-1 rounded text-white">Go</button>
+</form>
+
+
+<div class="overflow-x-auto shadow-md ">
+<table class="min-w-full border text-sm ">
+  <thead class="bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100 border-b">
+    <tr>
+      {% for col in columns %}
+      <th class="p-1">{{ col }}</th>
+      {% endfor %}
+      <th class="p-1">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in rows %}
+    <tr class="border-b hover:bg-gray-100 dark:hover:bg-gray-900 ">
+      {% for col in columns %}
+      <td class="p-1">
+        <input type="text" value="{{ row[col] }}" 
+               onchange="editRow('{{ row.id }}', '{{ col }}', this.value)"
+               class="border p-1 w-full bg-gray-50 dark:bg-gray-800 dark:text-white rounded">
+      </td>
+      {% endfor %}
+      <td class="p-1">
+        <button onclick="deleteRow('{{ row.id }}')" 
+                class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded">Delete</button>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<script>
+function editRow(id, column, value){
+    fetch(`/table/{{ table }}/edit`, {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({id: id, column: column, value: value})
+    }).then(res=>res.json()).then(data=>{
+        if(data.status==="success"){
+            console.log("Updated successfully")
+        }else{
+            alert("Error: " + data.msg)
+        }
+    })
+}
+
+function deleteRow(id){
+    if(!confirm("Are you sure you want to delete this row?")) return;
+    fetch(`/table/{{ table }}/delete`, {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({id: id})
+    }).then(res=>res.json()).then(data=>{
+        if(data.status==="success"){
+            location.reload()
+        }else{
+            alert("Error: " + data.msg)
+        }
+    })
+}
+</script>
+
+</div>
+{% endblock %}

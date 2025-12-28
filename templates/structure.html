@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2 class="text-xl font-bold mb-4">Structure: {{ table }}</h2>
+
+<table class="border w-full">
+<tr class="bg-gray-200 dark:bg-gray-700">
+<th class="p-2">Field</th>
+<th class="p-2">Type</th>
+<th class="p-2">Null</th>
+<th class="p-2">Key</th>
+</tr>
+{% for c in cols %}
+<tr class="border-b">
+<td class="p-2">{{ c.Field }}</td>
+<td class="p-2">{{ c.Type }}</td>
+<td class="p-2">{{ c.Null }}</td>
+<td class="p-2">{{ c.Key }}</td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

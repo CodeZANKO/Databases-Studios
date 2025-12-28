@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2 class="text-xl font-bold mb-4">Indexes: {{ table }}</h2>
+<table class="min-w-full border">
+<tr class="bg-gray-200 dark:bg-gray-700">
+<th>Key Name</th>
+<th>Column</th>
+<th>Unique</th>
+<th>Actions</th>
+</tr>
+{% for i in indexes %}
+<tr>
+<td>{{ i.Key_name }}</td>
+<td>{{ i.Column_name }}</td>
+<td>{{ i.Non_unique == 0 and 'Yes' or 'No' }}</td>
+<td>
+<a href="#" class="text-red-500">Drop</a>
+</td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

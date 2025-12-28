@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="mb-4 flex items-center space-x-2">
+  <a href="/dashboard" 
+     class="bg-gray-500 hover:bg-gray-600 text-white px-3 py-1 rounded flex items-center">
+    <!-- Optional icon -->
+    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" 
+         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" 
+            d="M15 19l-7-7 7-7"></path>
+    </svg>
+    Go Back Dashboard
+  </a>
+</div>
+
+<div class="flex justify-center items-center min-h-[60vh]">
+  <div class="bg-white dark:bg-gray-800 shadow rounded p-6 w-full max-w-sm text-center">
+    <h2 class="text-xl font-bold mb-4">Switch Database</h2>
+    <form method="post" class="space-y-4">
+      <select name="dbname" class="p-2 rounded w-full text-gray-700 dark:text-gray-200 dark:bg-gray-700">
+        {% for db in databases %}
+        <option value="{{ db }}">{{ db }}</option>
+        {% endfor %}
+      </select>
+      <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded w-full">
+        Switch
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock %}
+

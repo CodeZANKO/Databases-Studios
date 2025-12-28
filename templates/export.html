@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1 class="text-2xl font-bold mb-4 text-center">coming soon</h1>
+<div class="flex flex-col items-center min-h-[60vh] justify-center px-4">
+
+  <div class="bg-white dark:bg-gray-800 shadow rounded p-6 w-full max-w-md text-center space-y-4">
+    <h2 class="text-2xl font-bold mb-4">Export Database</h2>
+
+    <form method="post" class="space-y-4">
+      <!-- Select database -->
+      <div>
+        <label class="block mb-1 text-gray-700 dark:text-gray-200">Database</label>
+        <select name="dbname" class="w-full p-2 rounded dark:bg-gray-700 dark:text-white">
+          {% for table in tables %}
+          <option value="{{ table }}">{{ table }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- Export type -->
+      <div>
+        <label class="block mb-1 text-gray-700 dark:text-gray-200">Export Type</label>
+        <select name="export_type" class="w-full p-2 rounded dark:bg-gray-700 dark:text-white">
+          <option value="sql">SQL</option>
+          <option value="csv">CSV</option>
+        </select>
+      </div>
+
+      <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded w-full">
+        Export
+      </button>
+    </form>
+
+    <!-- Go back button -->
+    <a href="/dashboard" class="text-gray-600 dark:text-gray-300 hover:underline mt-4 inline-block">
+      &larr; Go Back
+    </a>
+  </div>
+
+</div>
+{% endblock %}

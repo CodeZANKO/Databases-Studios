@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="flex flex-col space-y-6">
+
+  <!-- Welcome / Info -->
+  <div class="bg-white dark:bg-gray-800 shadow-md rounded p-4">
+    <h1 class="text-2xl font-bold">Welcome to DataBase Studio</h1>
+    <p class="text-gray-600 dark:text-gray-300 mt-1">
+      Connected to database: <span class="font-mono">{{ session.db.database }}</span> 
+      on host: <span class="font-mono">{{ session.db.host }}</span>
+    </p>
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <a href="/sql" class="bg-blue-500 hover:bg-blue-600 text-white rounded p-4 text-center">
+      SQL Editor
+    </a>
+    <a href="/history" class="bg-green-500 hover:bg-green-600 text-white rounded p-4 text-center">
+      Query History
+    </a>
+    <a href="/import/{{ tables[0] if tables|length > 0 else '' }}" class="bg-yellow-500 hover:bg-yellow-600 text-white rounded p-4 text-center">
+      Import CSV
+    </a>
+    <a href="/er-graph" class="bg-purple-500 hover:bg-purple-600 text-white rounded p-4 text-center">
+      ER Graph
+    </a>
+    <a href="/audit" class="bg-red-500 hover:bg-red-600 text-white rounded p-4 text-center">
+      Audit Logs
+    </a>
+    <a href="/switch-db" class="bg-gray-500 hover:bg-gray-600 text-white rounded p-4 text-center">
+      Switch Database
+    </a>
+    <a href="/export" class="bg-indigo-500 hover:bg-indigo-600 text-white rounded p-4 text-center">
+      Export Data
+    </a>
+  </div>
+
+  <!-- Tables List -->
+  <div class="bg-white dark:bg-gray-800 shadow-md rounded p-4">
+    <h2 class="text-xl font-bold mb-2">Tables in Database</h2>
+    {% if tables %}
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {% for table in tables %}
+          <a href="/table/{{ table }}" 
+             class="bg-gray-100 dark:bg-gray-700 hover:bg-blue-500 hover:text-white rounded p-3 text-center font-semibold">
+            {{ table }}
+          </a>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="text-gray-500 dark:text-gray-400">No tables found in this database.</p>
+    {% endif %}
+  </div>
+
+</div>
+{% endblock %}

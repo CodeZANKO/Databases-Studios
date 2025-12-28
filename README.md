@@ -46,9 +46,11 @@ DB Studio is a modern web-based database management tool designed to simplify da
    ```bash
    git clone https://github.com/your-username/Databases-Studios.git
    ```
+2. Open Folder:
    ```bash
    cd Databases-Studios
    ```
+3. Run Tool:
    ```bash
    python app.py
    ```

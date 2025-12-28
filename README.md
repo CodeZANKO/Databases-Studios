@@ -45,3 +45,10 @@ DB Studio is a modern web-based database management tool designed to simplify da
 1. Clone the repository:
    ```bash
    git clone https://github.com/your-username/Databases-Studios.git
+   ```
+   ```bash
+   cd Databases-Studios
+   ```
+   ```bash
+   python app.py
+   ```

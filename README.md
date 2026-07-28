@@ -20,7 +20,7 @@ DB Studio is a modern web-based database management tool designed to simplify da
 ## 🛠️ Version & Credits
 
 - **Version:** 1.0.0  
-- **Developer:** Zanko Hatam Aziz Abdullkarim  
+- **Developer:** CodeZanko   
 - **Tech Stack:** Flask, Python, MySQL, Tailwind CSS, Alpine.js  
 
 ---
